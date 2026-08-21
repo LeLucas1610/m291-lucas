@@ -8,3 +8,7 @@ J'aime le design et le code, je suis quelqu'un de curieux qui aime apprendre de 
 J'attends de voir ce que l'on va faire ses premières semaines avant de choisir
 ## Comment me trouver
 - GitHub : LeLucas1610
+## Mes 3 sites préférés
+- [Pinterest](https://ch.pinterest.com)
+- [Youtube](https://www.youtube.com)
+- [Readymag](https://readymag.com)
