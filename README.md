@@ -12,3 +12,5 @@ J'attends de voir ce que l'on va faire ses premières semaines avant de choisir
 - [Pinterest](https://ch.pinterest.com)
 - [Youtube](https://www.youtube.com)
 - [Readymag](https://readymag.com)
+
+_Repo cloné et ouvert dans VS Code._
