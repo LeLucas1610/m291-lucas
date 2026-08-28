@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas — Présentation</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #cecece;
+            color: #1d1d1d;
+            line-height: 1.6;
+        }
+
+        .conteneur {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .presentation {
+            width: 100%;
+        }
+
+        .petit-texte {
+            font-size: 0.9rem;
+            color: #666666;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-top: 40px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .phrase {
+            font-size: 1.5rem;
+            margin-bottom: 35px;
+            max-width: 600px;
+        }
+
+        .competences {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .competence {
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .competence h2 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .competence p {
+            font-size: 0.95rem;
+            color: #555555;
+        }
+
+        .github {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #1d1d1d;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .github:hover {
+            background-color: #444444;
+        }
+
+        .en-ce-moment {
+            padding: 60px 0;
+        }
+
+        .en-ce-moment h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .series {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .serie {
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .serie h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .serie p {
+            color: #555555;
+        }
+
+        footer {
+            padding: 20px 0;
+            color: #666666;
+            font-size: 0.85rem;
+        }
+
+        /* Adaptation pour les petits écrans */
+        @media (max-width: 650px) {
+            header {
+                min-height: auto;
+                padding: 80px 0;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .phrase {
+                font-size: 1.2rem;
+            }
+
+            .competences,
+            .series {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="conteneur">
+        <header>
+            <div class="presentation">
+                <p class="petit-texte">Médiamaticien CFC · 3e année</p>
+
+                <h1>Lucas</h1>
+
+                <p class="phrase">J'adore le code.</p>
+
+                <section class="competences">
+                    <article class="competence">
+                        <h2>Design</h2>
+                        <p>J'adore le design et la création visuelle.</p>
+                    </article>
+
+                    <article class="competence">
+                        <h2>Jeux vidéo</h2>
+                        <p>J'aimerais pouvoir créer et coder mes propres jeux.</p>
+                    </article>
+
+                    <article class="competence">
+                        <h2>Animation</h2>
+                        <p>J'adore l'animation et tout ce qu'elle permet de créer.</p>
+                    </article>
+                </section>
+                <section class="en-ce-moment">
+                    <h2>En ce moment, je regarde</h2>
+                    <div class="series">
+                        <article class="serie">
+                            <h3>The Mentalist</h3>
+                            <p>Une série policière que j'aime particulièrement.</p>
+                        </article>
+                        <article class="serie">
+                            <h3>Arcane</h3>
+                            <p>Une série d'animation avec un univers visuel impressionnant.</p>
+                        </article>
+                    </div>
+                </section>
+                <a class="github" href="https://github.com/LeLucas1610" target="_blank">
+                    Voir mon GitHub
+                </a>
+            </div>
+        </header>
+
+        <footer>
+            <p>© 2026 Lucas</p> <!-- pas demandé -->
+        </footer>
+    </main>
+
+</body>
+
+</html>
