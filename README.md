@@ -14,3 +14,7 @@ J'attends de voir ce que l'on va faire ses premières semaines avant de choisir
 - [Readymag](https://readymag.com)
 
 _Repo cloné et ouvert dans VS Code._
+
+## En ligne 
+
+Page profil : https://lelucas1610.github.io/m291-lucas/
