@@ -4,10 +4,10 @@ Barème : 1 = cassé · 3 = moyen · 5 = ça va (ces pages n'auront jamais 5 par
 
 | Capture | Lisibilité | Navigation | Feedback | Cohérence | Accessibilité | Phrase précise |
 |---|---|---|---|---|---|---|
-| 01 mur de texte | 1 | 2 | 2 | 2 | 1 | |
-| 02 labyrinthe | 3 | 1 | 1 | 2 | 1 | |
-| 03 silence | 2 | 3 | 1 | 3 | 1 | |
-| 04 carnaval | 1 | 2 | 2 | 1 | 1 | |
+| 01 mur de texte | 1 | 2 | 2 | 2 | 1 | Tout le texte a la même taille et la même couleur grise très pâle : on ne voit pas où sont les titres, et ça fait un gros pavé fatigant à lire. Le menu du haut aligne 8 liens qui se ressemblent tous, on ne sait pas lesquels sont importants, et les liens « cliquez ici » ne disent pas où ils mènent. |
+| 02 labyrinthe | 3 | 1 | 1 | 2 | 1 | Pour faire une action, la page te demande de passer par 6 menus l'un après l'autre et dit que le bouton principal est « quelque part » : personne ne peut deviner par où commencer. Rien n'indique jamais où tu te trouves dans le site, et le lien « Aide? » est posé au hasard dans un coin, décalé du reste. |
+| 03 silence | 2 | 3 | 1 | 3 | 1 | Le bouton « ok » est écrit en gris sur gris : on ne lit pas ce qu'il dit, et quand on clique il ne se passe strictement rien (pas de message, pas de confirmation). Les cases « email » et « mot de passe » n'ont pas d'étiquette rattachée correctement, et la phrase « vous acceptez tout » est écrite tellement pâle qu'on la rate. |
+| 04 carnaval | 1 | 2 | 2 | 1 | 1 | Il y a 4 ou 5 polices différentes et du texte vert sur fond jaune : les couleurs se mélangent et on lit très mal. Pour savoir si un article est en promo, il faut repérer la couleur rouge ou verte du prix : quelqu'un qui distingue mal les couleurs n'a aucun autre indice, et les boutons « CLICK » et « BUY » sont minuscules et pas clairs. |
 
 ## La pire, pour la présentation
 
