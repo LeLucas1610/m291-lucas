@@ -26,7 +26,7 @@
 | genre | texte | Aventure |
 | dureeEstimee | heures | 8 |
 | statut | à jouer / en cours / terminé / abandonné | à jouer |
-| dateAjout | date | 2025-11-28 |
+| dateAjout | date | 28-11-2025 |
 | resume | 1 phrase | « Une gardienne de phare explore une île gelée pour rallumer la lumière. » |
 | jaquette | image | lanterne-02.webp |
 
