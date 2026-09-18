@@ -13,7 +13,7 @@ En Suisse romande, beaucoup de joueurs adultes possèdent des jeux sur plusieurs
 - **Prénom & Âge :** Kevin, 29 ans, logisticien à Vevey
 - **Contexte d'utilisation :** le soir, depuis le canapé, sur smartphone (390 px) tenu d'une main, avec environ une heure de jeu devant lui
 - **Situation :** plus de 60 jeux jamais lancés, répartis sur Switch, PS5 et PC
-- **Besoins clés :** choisir vite, reconnaître ses jeux à la jaquette, filtrer par plateforme et par durée sans ouvrir de menu
+- **Besoins clés :** choisir vite, reconnaître ses jeux à la jaquette, filtrer par plateforme en un toucher et par durée en deux
 - **Ce qui le fait fermer l'app :** devoir créer un compte, une longue liste sans filtres, des jaquettes minuscules
 
 Détail complet : [`design/persona.md`](design/persona.md)
@@ -44,27 +44,34 @@ Détail complet : [`design/persona.md`](design/persona.md)
 
 ## 4. Écrans
 
-- **Écran 1 :** Bibliothèque
-- **Écran 2 :** Fiche d'un jeu
-- **Écran 3 :** En cours
+- **Écran 1 :** Accueil — `01-accueil-mobile.png`
+- **Écran 2 :** Vue filtrée — `02-recherche-filtre.png`
+- **Écran 3 :** Fiche détaillée — `03-detail-mobile.png`
+- **Déclinaison desktop :** Accueil en 1440 px — `desktop-1440.png`
 
-### Écran 1 — Bibliothèque
+Wireframes : [`design/wireframes/`](design/wireframes/)
 
-- **On y voit :** une grille de grandes jaquettes, un compteur du nombre de jeux affichés, les filtres en bas de l'écran.
-- **On peut y faire :** filtrer par plateforme, statut, genre et durée, rechercher par titre, trier les résultats.
-- **Bouton principal :** une jaquette, qui ouvre la fiche du jeu.
+### Écran 1 — Accueil
 
-### Écran 2 — Fiche d'un jeu
+- **On y voit :** le titre PICKR, le nombre de jeux, la recherche, une liste d'une colonne de cartes (grande jaquette, titre, plateforme, genre, durée, statut) et la barre de filtres fixée en bas de l'écran.
+- **On peut y faire :** rechercher par titre, choisir une plateforme (Tous, Switch, PS5, PC) en un toucher, ouvrir les panneaux Statut, Durée, Genre et Tri.
+- **Bouton principal :** une carte, qui ouvre la fiche du jeu.
 
-- **On y voit :** la jaquette, le titre, le résumé, la plateforme, le genre et la durée estimée.
-- **On peut y faire :** changer le statut du jeu, revenir à la bibliothèque.
-- **Bouton principal :** « Passer en cours ».
+### Écran 2 — Vue filtrée
 
-### Écran 3 — En cours
+- **On y voit :** la même liste réduite aux jeux qui correspondent, les filtres actifs en fond sombre avec leur valeur (« À jouer ▾ », « < 10 h ▾ ») et une ligne de résultat (« 3 jeux · Switch · À jouer · < 10 h »). Si aucun jeu ne correspond : un message et le bouton « Élargir à 20 h ».
+- **On peut y faire :** modifier ou effacer les filtres, ouvrir une fiche.
+- **Bouton principal :** une carte, qui ouvre la fiche ; « Effacer » remet tous les filtres à zéro.
 
-- **On y voit :** les jeux commencés, avec leur jaquette et leur plateforme.
-- **On peut y faire :** ouvrir la fiche d'un jeu pour le terminer ou l'abandonner.
-- **Bouton principal :** une jaquette, qui ouvre la fiche pour reprendre le jeu.
+### Écran 3 — Fiche détaillée
+
+- **On y voit :** la jaquette, le titre, le statut actuel, la plateforme, le genre, la durée estimée, la date d'ajout et le résumé.
+- **On peut y faire :** changer le statut du jeu, revenir à la liste.
+- **Bouton principal :** « Passer en « En cours » », en bas de l'écran. « Terminé » et « Abandonné » sont des actions secondaires.
+
+### Déclinaison desktop (1440 px)
+
+Grille de 12 colonnes, contenu de 1200 px centré. Les filtres passent dans une barre latérale fixe (3 colonnes) : plateformes dépliées, Statut, Durée, Genre et Tri en listes déroulantes. Les cartes occupent 9 colonnes, 3 par rangée.
 
 ## 5. Ambiance Visuelle
 

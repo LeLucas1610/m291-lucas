@@ -24,4 +24,4 @@ Devoir créer un compte ou se connecter, une longue liste sans filtres à faire 
 
 1. Il tient son téléphone d'une main : filtres et boutons principaux en bas de l'écran, dans la zone du pouce.
 2. Il reconnaît ses jeux à la jaquette plus qu'au titre : grille de grandes jaquettes plutôt qu'une liste de texte.
-3. Il joue par sessions d'une heure en semaine : la plateforme et la durée totale sont les filtres prioritaires, visibles sans ouvrir de menu.
+3. Il joue par sessions d'une heure en semaine : la plateforme et la durée totale sont les filtres prioritaires. La plateforme se choisit en un toucher, la durée en deux, et la valeur choisie reste affichée sur le filtre.

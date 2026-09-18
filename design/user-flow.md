@@ -4,7 +4,7 @@
 
 **Début :** la personne ouvre PICKR sur son téléphone, le soir, depuis le canapé.
 
-**Fin réussie :** la personne a passé un jeu en « En cours » et il apparaît dans l'écran « En cours ».
+**Fin réussie :** la personne a passé un jeu en « En cours » et il apparaît quand elle filtre Statut → En cours.
 
 ## Chemin
 
