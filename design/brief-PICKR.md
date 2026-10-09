@@ -21,7 +21,9 @@ Détail complet : [`design/persona.md`](design/persona.md)
 ## 3. Fonctionnalités Essentielles (Périmètre MVP)
 
 1. Affichage de la bibliothèque sous forme de grille de cartes (jaquettes).
-2. Filtrage instantané (plateforme, statut, genre, durée), recherche par titre et tri (date d'ajout, durée, titre).
+2. Filtrage instantané (plateforme, statut, genre, durée), recherche par titre et tri.
+   - **Durée :** <10h, 10h-20h, 20-40h, >40h, Toutes.
+   - **Tri :** Plus récents, Plus courts d'abord, Plus longs d'abord.
 3. Consultation d'une fiche détaillée complète.
 4. Changement du statut d'un jeu (à jouer, en cours, terminé, abandonné), enregistré dans le navigateur.
 5. État « aucun résultat » qui propose d'assouplir un filtre.
@@ -51,6 +53,8 @@ Détail complet : [`design/persona.md`](design/persona.md)
 
 Wireframes : [`design/wireframes/`](design/wireframes/)
 
+Maquettes : 3 directions (sobre, chaleureuse, audacieuse). Direction retenue : **audacieuse**, avec les badges de statut de la direction chaleureuse. Choix argumenté : [`design/critique.md`](design/critique.md)
+
 ### Écran 1 — Accueil
 
 - **On y voit :** le titre PICKR, le nombre de jeux, la recherche, une liste d'une colonne de cartes (grande jaquette, titre, plateforme, genre, durée, statut) et la barre de filtres fixée en bas de l'écran.
@@ -59,7 +63,7 @@ Wireframes : [`design/wireframes/`](design/wireframes/)
 
 ### Écran 2 — Vue filtrée
 
-- **On y voit :** la même liste réduite aux jeux qui correspondent, les filtres actifs en fond sombre avec leur valeur (« À jouer ▾ », « < 10 h ▾ ») et une ligne de résultat (« 3 jeux · Switch · À jouer · < 10 h »). Si aucun jeu ne correspond : un message et le bouton « Élargir à 20 h ».
+- **On y voit :** la même liste réduite aux jeux qui correspondent, les filtres actifs en fond blanc cassé avec leur valeur (« À jouer ▾ », « <10h ▾ », « Plus longs ▾ ») et une ligne de résultat (« 3 jeux · Switch · À jouer · <10h »). Si aucun jeu ne correspond : un message et un bouton qui propose la tranche de durée voisine (« Élargir à 10h-20h »).
 - **On peut y faire :** modifier ou effacer les filtres, ouvrir une fiche.
 - **Bouton principal :** une carte, qui ouvre la fiche ; « Effacer » remet tous les filtres à zéro.
 
@@ -79,20 +83,33 @@ Grille de 12 colonnes, contenu de 1200 px centré. Les filtres passent dans une 
 
 Comme l'écran de sélection de jeu d'une console 16 bits : des bordures et des icônes en pixels, des couleurs franches sur fond sombre. L'effet rétro reste dans les détails, pour que la lecture reste confortable sur téléphone.
 
-## 6. Palette
+## 6. Palette & Typographie
 
-- **Fond :** bleu nuit très sombre
-- **Texte :** blanc cassé
-- **Accent :** jaune vif, comme un curseur de menu
-- **Attention / erreur :** rouge corail
+| Rôle | Couleur |
+|---|---|
+| Fond | `#0D1528` (bleu nuit très sombre) |
+| Surface (cartes, panneaux) | `#142038` |
+| Texte | `#F3EFE4` (blanc cassé) |
+| Texte secondaire | `#AAB4C8` |
+| Accent (bouton principal, focus, liens) | `#FFD23F` (jaune curseur) |
+| Attention / erreur | `#FF7A6B` (rouge corail) |
+| Contours (champs, puces) | `#6A7DA3` |
+| Badge « À jouer » | `#8FB3FF` |
+| Badge « En cours » | `#7EE0C3` |
+| Badge « Terminé » | `#C9D1E0` |
+| Badge « Abandonné » | pointillés `#FF7A6B` |
 
-(Couleurs en mots pour l'instant ; hex en s7-s9.)
+Ratios mesurés : [`design/contrastes.md`](design/contrastes.md)
+
+- **Logo :** Silkscreen (police pixel), réservée au logo.
+- **Titres :** Archivo, gras, largeur étendue (125 %).
+- **Texte courant :** Archivo, normal.
 
 ## 7. Contraintes Techniques & Ergonomiques
 
 - **Approche :** Mobile First (largeur de référence 390 px), boutons principaux dans la zone du pouce.
 - **Technologie :** Vanilla HTML5 sémantique, CSS moderne avec variables, JavaScript natif sans bibliothèque.
-- **Accessibilité :** ratios de contraste WCAG AA (≥ 4,5:1), navigation clavier assurée, texte alternatif sur chaque jaquette.
+- **Accessibilité :** ratios de contraste WCAG AA (≥ 4,5:1), navigation clavier assurée, texte alternatif sur chaque jaquette, cibles tactiles d'au moins 44 × 44 px.
 - **Stockage :** données dans un fichier JSON local, statuts modifiés dans le localStorage, aucun serveur.
 
 ## 8. Interdits
