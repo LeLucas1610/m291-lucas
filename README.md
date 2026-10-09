@@ -17,8 +17,5 @@ _Repo cloné et ouvert dans VS Code._
 
 ## En ligne 
 
-Page profil : https://lelucas1610.github.io/m291-lucas/
-
-## Test 5 secondes (s01)
-
-"Tu es friand des nouvelles technologies" Loïc
+Page profil : https://lelucas1610.github.io/m291-lucas/ 
+Dossier design : [`design/`](design/)
