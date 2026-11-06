@@ -1,0 +1,623 @@
+/* =========================================================
+   PICKR — Écran d'accueil
+   Mobile first (390 px) · 1 point de rupture à 700 px
+   ========================================================= */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  /* Couleurs (palette du brief) */
+  --color-bg: #0D1528;
+  --color-surface: #142038;
+  --color-text: #F3EFE4;
+  --color-text-muted: #AAB4C8;
+  --color-accent: #FFD23F;
+  --color-erreur: #FF7A6B;
+  --color-contour: #6A7DA3;
+  --color-ligne: #26375A;
+  --color-ombre: #070B16;
+
+  /* Badges de statut */
+  --badge-a-jouer: #8FB3FF;
+  --badge-en-cours: #7EE0C3;
+  --badge-termine: #C9D1E0;
+  --badge-abandonne: var(--color-erreur);
+
+  /* Typographie (2 polices) */
+  --font-logo: "Silkscreen", "Courier New", monospace;
+  --font-texte: "Archivo", Arial, sans-serif;
+  --largeur-titre: 125%;
+
+  --fs-petit: 0.875rem;
+  --fs-base: 1rem;
+  --fs-titre-carte: 1.375rem;
+  --fs-titre-section: 1.75rem;
+  --fs-jaquette: 2rem;
+  --fs-logo: 1.75rem;
+
+  /* Espacements (multiples de 4 px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+
+  /* Composants */
+  --bordure: 2px;
+  --cible-min: 3rem;
+  --ombre-carte: 6px 6px 0 var(--color-ombre);
+  --largeur-max: 75rem;
+  --hauteur-barre-filtres: 11rem;
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-texte);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+/* ---------- 3. En-tête ---------- */
+.entete {
+  display: grid;
+  grid-template-areas:
+    "logo"
+    "compteur"
+    "recherche";
+  padding: var(--space-4) var(--space-3) var(--space-3);
+}
+
+.logo {
+  grid-area: logo;
+  font-family: var(--font-logo);
+  font-size: var(--fs-logo);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.entete__compteur {
+  grid-area: compteur;
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.recherche {
+  grid-area: recherche;
+  margin-top: var(--space-4);
+}
+
+.recherche__champ {
+  appearance: none;
+  width: 100%;
+  min-height: var(--cible-min);
+  padding: var(--space-3) var(--space-4);
+  font: inherit;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: var(--bordure) solid var(--color-contour);
+  border-radius: 0;
+}
+
+.recherche__champ::placeholder {
+  color: var(--color-text-muted);
+}
+
+.recherche__champ:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- 4. Mise en page ---------- */
+.page {
+  /* place libre en bas pour ne pas cacher la dernière carte sous la barre */
+  padding: 0 var(--space-3) var(--hauteur-barre-filtres);
+}
+
+/* ---------- 5. Filtres (mobile : barre fixe en bas) ---------- */
+.filtres {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background-color: var(--color-bg);
+  border-top: var(--bordure) solid var(--color-ligne);
+}
+
+.filtres__titre {
+  grid-column: 1 / -1;
+  font-size: var(--fs-petit);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.filtres__desktop,
+.texte-desktop {
+  display: none;
+}
+
+/* Plateformes : 1 toucher */
+.plateformes {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+}
+
+.plateforme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: var(--cible-min);
+  background-color: var(--color-surface);
+  border: var(--bordure) solid var(--color-contour);
+  cursor: pointer;
+}
+
+.plateformes input:checked + .plateforme {
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 700;
+}
+
+.plateformes input:focus-visible + .plateforme {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Panneaux Statut / Durée / Genre / Tri */
+.panneau__bouton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--cible-min);
+  background-color: var(--color-surface);
+  border: var(--bordure) solid var(--color-contour);
+  cursor: pointer;
+  list-style: none;
+}
+
+.panneau__bouton::-webkit-details-marker {
+  display: none;
+}
+
+/* petite flèche ▾ dessinée en CSS */
+.panneau__bouton::after {
+  content: "";
+  width: 0.6em;
+  height: 0.35em;
+  background-color: currentColor;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.panneau[open] .panneau__bouton {
+  border-color: var(--color-accent);
+}
+
+.panneau__bouton:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* sur mobile, le panneau s'ouvre au-dessus de la barre */
+.panneau__contenu {
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: calc(100% + var(--space-2));
+  display: grid;
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-surface);
+  border: var(--bordure) solid var(--color-contour);
+}
+
+.panneau__contenu label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--cible-min);
+  cursor: pointer;
+}
+
+.panneau__contenu input {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--color-accent);
+}
+
+/* ---------- 6. Liste et cartes ---------- */
+.cartes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.carte {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border: var(--bordure) solid var(--color-ligne);
+  transition: translate 0.12s steps(2), box-shadow 0.12s steps(2);
+}
+
+.carte:hover,
+.carte:focus-within {
+  translate: -4px -4px;
+  box-shadow: var(--ombre-carte);
+}
+
+/* Jaquette provisoire : bande claire, motif pixel, bande sombre */
+.jaquette {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 16 / 9;
+  padding: var(--space-3) var(--space-4);
+  overflow: hidden;
+  background: linear-gradient(var(--j-haut) 0 28%, var(--j-bas) 28%);
+}
+
+.jaquette::before {
+  content: "";
+  position: absolute;
+  inset: 28% 0 auto;
+  height: 18%;
+  background-image: var(--motif);
+  background-size: var(--motif-taille);
+}
+
+/* pour les vraies images .webp plus tard */
+img.jaquette {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  object-fit: cover;
+}
+
+.jaquette__plateforme {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--fs-petit);
+  font-weight: 700;
+  background-color: var(--color-bg);
+}
+
+.jaquette__titre {
+  position: relative;
+  font-size: var(--fs-jaquette);
+  font-weight: 800;
+  font-stretch: var(--largeur-titre);
+  line-height: 1;
+  text-shadow: 3px 3px 0 var(--color-ombre);
+}
+
+/* Couleurs des jaquettes (variables locales) */
+.jaquette--bleu   { --j-haut: #3A55B4; --j-bas: #19245A; }
+.jaquette--vert   { --j-haut: #3B7D6E; --j-bas: #1B3B33; }
+.jaquette--ocre   { --j-haut: #976E28; --j-bas: #4A3214; }
+.jaquette--violet { --j-haut: #7F4399; --j-bas: #40195A; }
+.jaquette--indigo { --j-haut: #5A4FC9; --j-bas: #25236B; }
+.jaquette--brique { --j-haut: #B54E37; --j-bas: #5A2216; }
+
+/* Motifs pixel */
+.motif-trame {
+  --motif: repeating-conic-gradient(var(--j-haut) 0 25%, var(--j-bas) 0 50%);
+  --motif-taille: 4px 4px;
+}
+
+.motif-damier {
+  --motif: repeating-conic-gradient(var(--j-haut) 0 25%, var(--j-bas) 0 50%);
+  --motif-taille: 16px 16px;
+}
+
+.motif-rayures {
+  --motif: repeating-linear-gradient(90deg, var(--j-haut) 0 14px, var(--j-bas) 14px 28px);
+  --motif-taille: auto;
+}
+
+/* Corps de la carte */
+.carte__corps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+
+.carte__titre {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-titre-carte);
+  font-weight: 800;
+  font-stretch: var(--largeur-titre);
+  line-height: 1.15;
+}
+
+/* curseur ▶ façon écran de sélection, au survol ou au focus */
+.carte__titre::before {
+  content: "";
+  display: none;
+  flex-shrink: 0;
+  width: 0.7em;
+  height: 0.8em;
+  background-color: var(--color-accent);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.carte:hover .carte__titre::before,
+.carte:focus-within .carte__titre::before {
+  display: block;
+}
+
+.carte__lien {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* toute la carte devient cliquable */
+.carte__lien::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.carte__lien:focus-visible {
+  outline: none;
+}
+
+.carte__lien:focus-visible::after {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.carte__meta {
+  color: var(--color-text-muted);
+}
+
+.carte__pied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-1);
+}
+
+.carte__voir {
+  visibility: hidden;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.carte:hover .carte__voir,
+.carte:focus-within .carte__voir {
+  visibility: visible;
+}
+
+/* ---------- 7. Badges de statut ---------- */
+.badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-petit);
+  font-weight: 700;
+  border: var(--bordure) solid;
+}
+
+.badge--a-jouer {
+  color: var(--badge-a-jouer);
+  border-color: currentColor;
+}
+
+.badge--en-cours {
+  color: var(--color-bg);
+  background-color: var(--badge-en-cours);
+  border-color: var(--badge-en-cours);
+}
+
+.badge--termine {
+  color: var(--color-bg);
+  background-color: var(--badge-termine);
+  border-color: var(--badge-termine);
+}
+
+.badge--abandonne {
+  color: var(--badge-abandonne);
+  border-color: currentColor;
+  border-style: dashed;
+}
+
+/* ---------- 8. Utilitaires ---------- */
+.sr-only,
+.sr-only-mobile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================================
+   9. Point de rupture unique : 700 px et plus
+   ========================================================= */
+@media (min-width: 700px) {
+
+  /* les éléments masqués sur mobile réapparaissent */
+  .sr-only-mobile {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+
+  .filtres__desktop,
+  .texte-desktop {
+    display: block;
+  }
+
+  .texte-mobile {
+    display: none;
+  }
+
+  /* En-tête sur une ligne */
+  .entete {
+    grid-template-areas: "logo recherche compteur";
+    grid-template-columns: auto minmax(0, 42rem) auto;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    border-bottom: var(--bordure) solid var(--color-ligne);
+  }
+
+  .entete__compteur,
+  .recherche {
+    margin-top: 0;
+  }
+
+  /* Barre latérale (≈ 3 colonnes) + liste (≈ 9 colonnes) */
+  .page {
+    display: grid;
+    grid-template-columns: minmax(13rem, 3fr) 9fr;
+    gap: var(--space-5);
+    max-width: var(--largeur-max);
+    margin-inline: auto;
+    padding: var(--space-5) var(--space-4);
+  }
+
+  /* Filtres : la barre fixe devient une colonne */
+  .filtres {
+    position: sticky;
+    top: var(--space-4);
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .filtres__titre {
+    font-size: var(--fs-titre-section);
+    font-weight: 800;
+    font-stretch: var(--largeur-titre);
+    color: var(--color-text);
+  }
+
+  .filtres__groupe {
+    margin: var(--space-3) 0 var(--space-2);
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  .plateformes {
+    grid-template-columns: 1fr;
+  }
+
+  .plateforme {
+    justify-content: flex-start;
+    padding-inline: var(--space-4);
+  }
+
+  /* rond de bouton radio dessiné en CSS */
+  .plateforme::before {
+    content: "";
+    width: 1.25rem;
+    height: 1.25rem;
+    border: var(--bordure) solid currentColor;
+    border-radius: 50%;
+  }
+
+  .plateformes input:checked + .plateforme::before {
+    background: radial-gradient(currentColor 0 40%, transparent 45%);
+  }
+
+  .panneau__bouton {
+    justify-content: space-between;
+    padding-inline: var(--space-4);
+  }
+
+  /* le panneau s'ouvre sous son bouton, dans la colonne */
+  .panneau__contenu {
+    position: static;
+    border-top: 0;
+  }
+
+  .filtres__effacer {
+    align-self: flex-start;
+    min-height: var(--cible-min);
+    margin-top: var(--space-4);
+    padding: 0;
+    font: inherit;
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .filtres__effacer:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* Liste */
+  .bibliotheque__entete {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+  }
+
+  .bibliotheque__titre {
+    font-size: var(--fs-titre-section);
+    font-weight: 800;
+    font-stretch: var(--largeur-titre);
+  }
+
+  .bibliotheque__tri {
+    color: var(--color-text-muted);
+  }
+
+  .cartes {
+    gap: var(--space-4);
+  }
+}
+
+/* Accessibilité : pas de mouvement si l'utilisateur l'a désactivé */
+@media (prefers-reduced-motion: reduce) {
+  .carte {
+    transition: none;
+  }
+}

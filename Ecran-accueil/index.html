@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PICKR — Ta bibliothèque de jeux</title>
+
+  <!-- 2 polices : Silkscreen (logo) + Archivo (titres et texte, avec axe de largeur) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Silkscreen&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="entete">
+    <h1 class="logo">PICKR</h1>
+    <p class="entete__compteur">50 jeux · toutes plateformes</p>
+
+    <form class="recherche" role="search" action="#">
+      <label for="recherche" class="sr-only">Rechercher un jeu par titre</label>
+      <input type="search" id="recherche" name="q" class="recherche__champ" placeholder="Rechercher un jeu…">
+    </form>
+  </header>
+
+  <main class="page">
+
+    <!-- FILTRES : barre fixe en bas sur mobile, barre latérale dès 700px -->
+    <form class="filtres" aria-labelledby="titre-filtres" action="#">
+      <h2 id="titre-filtres" class="filtres__titre">Filtres</h2>
+
+      <fieldset class="plateformes">
+        <legend class="filtres__groupe sr-only-mobile">Plateforme</legend>
+
+        <input type="radio" name="plateforme" id="pf-tous" value="tous" class="sr-only" checked>
+        <label for="pf-tous" class="plateforme">Tous</label>
+
+        <input type="radio" name="plateforme" id="pf-switch" value="switch" class="sr-only">
+        <label for="pf-switch" class="plateforme">Switch</label>
+
+        <input type="radio" name="plateforme" id="pf-ps5" value="ps5" class="sr-only">
+        <label for="pf-ps5" class="plateforme">PS5</label>
+
+        <input type="radio" name="plateforme" id="pf-pc" value="pc" class="sr-only">
+        <label for="pf-pc" class="plateforme">PC</label>
+      </fieldset>
+
+      <p class="filtres__groupe filtres__desktop">Affiner</p>
+
+      <!-- name="panneau" : un seul panneau ouvert à la fois, sans JS -->
+      <details class="panneau" name="panneau">
+        <summary class="panneau__bouton">
+          <span class="texte-mobile">Statut</span><span class="texte-desktop">Tous les statuts</span>
+        </summary>
+        <fieldset class="panneau__contenu">
+          <legend class="sr-only">Statut</legend>
+          <label><input type="radio" name="statut" value="tous" checked> Tous</label>
+          <label><input type="radio" name="statut" value="a-jouer"> À jouer</label>
+          <label><input type="radio" name="statut" value="en-cours"> En cours</label>
+          <label><input type="radio" name="statut" value="termine"> Terminé</label>
+          <label><input type="radio" name="statut" value="abandonne"> Abandonné</label>
+        </fieldset>
+      </details>
+
+      <details class="panneau" name="panneau">
+        <summary class="panneau__bouton">
+          <span class="texte-mobile">Durée</span><span class="texte-desktop">Toutes les durées</span>
+        </summary>
+        <fieldset class="panneau__contenu">
+          <legend class="sr-only">Durée estimée</legend>
+          <label><input type="radio" name="duree" value="toutes" checked> Toutes</label>
+          <label><input type="radio" name="duree" value="moins-10"> &lt;10h</label>
+          <label><input type="radio" name="duree" value="10-20"> 10h-20h</label>
+          <label><input type="radio" name="duree" value="20-40"> 20-40h</label>
+          <label><input type="radio" name="duree" value="plus-40"> &gt;40h</label>
+        </fieldset>
+      </details>
+
+      <details class="panneau" name="panneau">
+        <summary class="panneau__bouton">
+          <span class="texte-mobile">Genre</span><span class="texte-desktop">Tous les genres</span>
+        </summary>
+        <fieldset class="panneau__contenu">
+          <legend class="sr-only">Genre</legend>
+          <label><input type="radio" name="genre" value="tous" checked> Tous</label>
+          <label><input type="radio" name="genre" value="action"> Action</label>
+          <label><input type="radio" name="genre" value="aventure"> Aventure</label>
+          <label><input type="radio" name="genre" value="gestion"> Gestion</label>
+          <label><input type="radio" name="genre" value="puzzle"> Puzzle</label>
+          <label><input type="radio" name="genre" value="rpg"> RPG</label>
+        </fieldset>
+      </details>
+
+      <p class="filtres__groupe filtres__desktop">Trier par</p>
+
+      <details class="panneau" name="panneau">
+        <summary class="panneau__bouton">
+          <span class="texte-mobile">Tri</span><span class="texte-desktop">Plus récents</span>
+        </summary>
+        <fieldset class="panneau__contenu">
+          <legend class="sr-only">Trier par</legend>
+          <label><input type="radio" name="tri" value="recents" checked> Plus récents</label>
+          <label><input type="radio" name="tri" value="courts"> Plus courts d'abord</label>
+          <label><input type="radio" name="tri" value="longs"> Plus longs d'abord</label>
+        </fieldset>
+      </details>
+
+      <!-- type="reset" remet tous les filtres à zéro sans JS -->
+      <button type="reset" class="filtres__effacer filtres__desktop">Effacer les filtres</button>
+    </form>
+
+    <!-- LISTE DES JEUX -->
+    <section class="bibliotheque" aria-labelledby="titre-liste">
+      <div class="bibliotheque__entete sr-only-mobile">
+        <h2 id="titre-liste" class="bibliotheque__titre">50 jeux</h2>
+        <p class="bibliotheque__tri">Trié par : plus récents</p>
+      </div>
+
+      <!-- Jaquettes provisoires en CSS (role="img" + aria-label = texte alternatif).
+           Quand tu auras les .webp : remplace chaque <div class="jaquette …"> par
+           <img class="jaquette" src="img/lanterne-02.webp" alt="Jaquette de Lanterne Froide"> -->
+      <ul class="cartes" role="list">
+
+        <li class="carte">
+          <div class="jaquette jaquette--bleu motif-trame" role="img" aria-label="Jaquette de Lanterne Froide">
+            <span class="jaquette__plateforme">Switch</span>
+            <span class="jaquette__titre">Lanterne Froide</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=lanterne-02">Lanterne Froide</a></h3>
+            <p class="carte__meta">Switch · Aventure · 8 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--a-jouer">À jouer</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="carte">
+          <div class="jaquette jaquette--vert motif-damier" role="img" aria-label="Jaquette de Orbite 404">
+            <span class="jaquette__plateforme">PC</span>
+            <span class="jaquette__titre">Orbite 404</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=orbite-404">Orbite 404</a></h3>
+            <p class="carte__meta">PC · Action · 12 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--en-cours">En cours</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="carte">
+          <div class="jaquette jaquette--ocre motif-damier" role="img" aria-label="Jaquette de Marée Basse">
+            <span class="jaquette__plateforme">PS5</span>
+            <span class="jaquette__titre">Marée Basse</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=maree-basse">Marée Basse</a></h3>
+            <p class="carte__meta">PS5 · Aventure · 15 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--a-jouer">À jouer</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="carte">
+          <div class="jaquette jaquette--violet motif-rayures" role="img" aria-label="Jaquette de Rail Nocturne">
+            <span class="jaquette__plateforme">Switch</span>
+            <span class="jaquette__titre">Rail Nocturne</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=rail-nocturne">Rail Nocturne</a></h3>
+            <p class="carte__meta">Switch · Puzzle · 6 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--a-jouer">À jouer</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="carte">
+          <div class="jaquette jaquette--violet motif-trame" role="img" aria-label="Jaquette de Petite Forge">
+            <span class="jaquette__plateforme">Switch</span>
+            <span class="jaquette__titre">Petite Forge</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=petite-forge">Petite Forge</a></h3>
+            <p class="carte__meta">Switch · Gestion · 9 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--a-jouer">À jouer</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="carte">
+          <div class="jaquette jaquette--indigo motif-trame" role="img" aria-label="Jaquette de Cendres d'Argent">
+            <span class="jaquette__plateforme">PS5</span>
+            <span class="jaquette__titre">Cendres d'Argent</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=cendres-argent">Cendres d'Argent</a></h3>
+            <p class="carte__meta">PS5 · RPG · 40 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--abandonne">Abandonné</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="carte">
+          <div class="jaquette jaquette--brique motif-damier" role="img" aria-label="Jaquette de Vent du Nord">
+            <span class="jaquette__plateforme">PC</span>
+            <span class="jaquette__titre">Vent du Nord</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=vent-du-nord">Vent du Nord</a></h3>
+            <p class="carte__meta">PC · Aventure · 7 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--termine">Terminé</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="carte">
+          <div class="jaquette jaquette--ocre motif-rayures" role="img" aria-label="Jaquette de Double Saut">
+            <span class="jaquette__plateforme">Switch</span>
+            <span class="jaquette__titre">Double Saut</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=double-saut">Double Saut</a></h3>
+            <p class="carte__meta">Switch · Action · 4 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--a-jouer">À jouer</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="carte">
+          <div class="jaquette jaquette--vert motif-damier" role="img" aria-label="Jaquette de Pixel Boulanger">
+            <span class="jaquette__plateforme">PC</span>
+            <span class="jaquette__titre">Pixel Boulanger</span>
+          </div>
+          <div class="carte__corps">
+            <h3 class="carte__titre"><a class="carte__lien" href="fiche.html?id=pixel-boulanger">Pixel Boulanger</a></h3>
+            <p class="carte__meta">PC · Gestion · 22 h</p>
+            <div class="carte__pied">
+              <span class="badge badge--en-cours">En cours</span>
+              <span class="carte__voir" aria-hidden="true">Voir →</span>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
